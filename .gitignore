@@ -1,4 +1,6 @@
 *.txt
+!requirements.txt
+
 .env*
 
 # Byte-compiled / optimized / DLL files
@@ -32,3 +34,6 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Flask
+wc/
