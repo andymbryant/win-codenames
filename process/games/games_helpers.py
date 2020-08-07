@@ -10,6 +10,7 @@ import os
 import glob
 import uuid
 from datetime import datetime
+from random import randint
 from games_config import *
 
 def get_game_words(words_for_game_df):
