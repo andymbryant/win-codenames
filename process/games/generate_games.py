@@ -7,7 +7,7 @@ def main():
     # Result CSV will have the game words and the top 5 generated clues
     create_result_csv = True
     # Number of games to be generated
-    num_games = 5
+    num_games = 1
 
     # Import Glove vectors
     glove_vectors_path = os.path.join(VECTORS_OUTPUT_PATH, 'glove_vectors.pkl')

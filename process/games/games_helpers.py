@@ -297,5 +297,4 @@ def create_output(output_df):
     now = datetime.now()
     time_info = now.strftime("%m-%d-%H-%M")
     output_path = os.path.join(DIRNAME, f'output/results/results_{time_info}.csv')
-    output_path = f'./output/results/results_{time_info}.csv'
     output_df.to_csv(output_path)

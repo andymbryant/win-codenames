@@ -1,0 +1,15 @@
+{
+  "id": "8e0adfa1",
+  "reviewer": "andyb",
+  "human_selected": "syrup",
+  "game_id": "09116434",
+  "num_displayed": 5,
+  "order_displayed": [
+      "bees",
+      "raspberry",
+      "vanilla",
+      "syrup",
+      "hazelnut"
+  ],
+  "shuffled_clues": true
+}

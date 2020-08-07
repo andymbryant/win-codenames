@@ -1,0 +1,238 @@
+{
+  "id": "9a6818a6",
+  "clues": [
+    {
+      "word": "tongs",
+      "rank": 17.5,
+      "goodness": 0.2681677435492176,
+      "bad_minimax": -0.25812320668690886,
+      "frequency": 17757.0,
+      "neutrals_minimax": -0.22843772756458422,
+      "variance": 0.4442134030715539,
+      "model_prediction": 0.09999988060931646
+    },
+    {
+      "word": "utensil",
+      "rank": 16.25,
+      "goodness": 0.2684927897406452,
+      "bad_minimax": -0.22969653534428328,
+      "frequency": 19541.0,
+      "neutrals_minimax": -0.18777023041984334,
+      "variance": 0.4572903013237453,
+      "model_prediction": 0.09984434519588196
+    },
+    {
+      "word": "spatula",
+      "rank": 0.0,
+      "goodness": 0.3286014942122647,
+      "bad_minimax": -0.23548823233091942,
+      "frequency": 13988.0,
+      "neutrals_minimax": -0.2528470952942116,
+      "variance": 0.49424654111491567,
+      "model_prediction": 0.09261173092375907
+    },
+    {
+      "word": "cleaver",
+      "rank": 22.5,
+      "goodness": 0.2584721005797924,
+      "bad_minimax": -0.20586757484391485,
+      "frequency": 22719.0,
+      "neutrals_minimax": -0.18630632345585196,
+      "variance": 0.5582287462145331,
+      "model_prediction": 0.09023977748030794
+    },
+    {
+      "word": "scalpel",
+      "rank": 33.75,
+      "goodness": 0.25261799888574166,
+      "bad_minimax": -0.13114110959444228,
+      "frequency": 21168.0,
+      "neutrals_minimax": -0.1530858440450303,
+      "variance": 0.47988896251675345,
+      "model_prediction": 0.07749027923796303
+    }
+  ],
+  "process_config": {
+    "AVG_DIST_MULT": 1.15,
+    "RANK_MULT": 1.25,
+    "PRIMARY_SORT_BY_COLUMNS": [
+      "goodness",
+      "bad_minimax",
+      "frequency",
+      "neutrals_minimax"
+    ],
+    "PRIMARY_SORT_ASCENDING": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "SECONDARY_SORT_BY_COLUMNS": [
+      "rank",
+      "goodness",
+      "variance"
+    ],
+    "SECONDARY_SORT_ASCENDING": [
+      true,
+      false,
+      false
+    ],
+    "SIZE": 2000,
+    "HIGH_SIZE": 2000,
+    "LOW_SIZE": 200,
+    "ASSASSIN_CUTOFF": 0.78,
+    "DEEP": true
+  },
+  "words": [
+    {
+      "id": "0635b3d9",
+      "word": "cook",
+      "type": "friend",
+      "is_top_friend": true
+    },
+    {
+      "id": "2621eafe",
+      "word": "knife",
+      "type": "friend",
+      "is_top_friend": true
+    },
+    {
+      "id": "d18eff15",
+      "word": "brush",
+      "type": "friend",
+      "is_top_friend": true
+    },
+    {
+      "id": "60c31b08",
+      "word": "limousine",
+      "type": "friend",
+      "is_top_friend": false
+    },
+    {
+      "id": "9c71149e",
+      "word": "tap",
+      "type": "friend",
+      "is_top_friend": false
+    },
+    {
+      "id": "26ad4b4b",
+      "word": "state",
+      "type": "friend",
+      "is_top_friend": false
+    },
+    {
+      "id": "6beab63b",
+      "word": "kangaroo",
+      "type": "friend",
+      "is_top_friend": false
+    },
+    {
+      "id": "99b6a1d2",
+      "word": "shoe",
+      "type": "friend",
+      "is_top_friend": false
+    },
+    {
+      "id": "b7d1d2a4",
+      "word": "concert",
+      "type": "foe",
+      "is_top_friend": null
+    },
+    {
+      "id": "66fd0c18",
+      "word": "fish",
+      "type": "foe",
+      "is_top_friend": null
+    },
+    {
+      "id": "72e0293a",
+      "word": "match",
+      "type": "foe",
+      "is_top_friend": null
+    },
+    {
+      "id": "5f94c455",
+      "word": "square",
+      "type": "foe",
+      "is_top_friend": null
+    },
+    {
+      "id": "493aa8a2",
+      "word": "march",
+      "type": "foe",
+      "is_top_friend": null
+    },
+    {
+      "id": "72c77530",
+      "word": "scale",
+      "type": "foe",
+      "is_top_friend": null
+    },
+    {
+      "id": "19a1a546",
+      "word": "bar",
+      "type": "foe",
+      "is_top_friend": null
+    },
+    {
+      "id": "3d8d089b",
+      "word": "cycle",
+      "type": "foe",
+      "is_top_friend": null
+    },
+    {
+      "id": "1c486df9",
+      "word": "snow",
+      "type": "foe",
+      "is_top_friend": null
+    },
+    {
+      "id": "748f29fd",
+      "word": "battery",
+      "type": "neutral",
+      "is_top_friend": null
+    },
+    {
+      "id": "d1aaa554",
+      "word": "key",
+      "type": "neutral",
+      "is_top_friend": null
+    },
+    {
+      "id": "5a7b0d0f",
+      "word": "dice",
+      "type": "neutral",
+      "is_top_friend": null
+    },
+    {
+      "id": "0d53607b",
+      "word": "telescope",
+      "type": "neutral",
+      "is_top_friend": null
+    },
+    {
+      "id": "0197f16d",
+      "word": "grass",
+      "type": "neutral",
+      "is_top_friend": null
+    },
+    {
+      "id": "7ddd5cd2",
+      "word": "card",
+      "type": "neutral",
+      "is_top_friend": null
+    },
+    {
+      "id": "4fe46ab7",
+      "word": "ring",
+      "type": "neutral",
+      "is_top_friend": null
+    },
+    {
+      "id": "667c0646",
+      "word": "bat",
+      "type": "assassin",
+      "is_top_friend": null
+    }
+  ]
+}

@@ -19,10 +19,10 @@ dirname = os.path.dirname(__file__)
 
 load_dotenv()
 
-DOWNLOAD_REVIEWS = True
-DOWNLOAD_GAMES = True
-SAVE_GAMES = True
-SAVE_REVIEWS = True
+DOWNLOAD_REVIEWS = False
+DOWNLOAD_GAMES = False
+SAVE_GAMES = False
+SAVE_REVIEWS = False
 TUNE_PARAMS = False
 SAVE_MODEL = True
 
@@ -34,6 +34,7 @@ X_columns = ['rank', 'goodness', 'bad_minimax', 'frequency', 'neutrals_minimax',
 y_var = 'human_selected'
 y_column = [y_var]
 all_columns = X_columns + y_column
+no_good_clues = 0
 output = pd.DataFrame(columns=all_columns)
 
 if DOWNLOAD_REVIEWS or DOWNLOAD_GAMES:
@@ -48,7 +49,6 @@ if DOWNLOAD_REVIEWS:
     all_reviews = [review for review in db.reviews.find()]
     if SAVE_REVIEWS:
         json_filepath = os.path.join(dirname, f'output/reviews_pkl/reviews_{time_info}.pkl')
-        # json_filepath = f'./output/reviews_pkl/reviews_{time_info}.pkl'
         with open(json_filepath, 'wb') as outfile:
             pickle.dump(all_reviews, outfile)
 else:
@@ -66,7 +66,6 @@ if DOWNLOAD_GAMES:
         all_games.append(game)
     if SAVE_GAMES:
         json_filepath = os.path.join(dirname, f'output/games_pkl/games_{time_info}.pkl')
-        # json_filepath = f'./output/games_pkl/games_{time_info}.pkl'
         with open(json_filepath, 'wb') as outfile:
             pickle.dump(all_games, outfile)
 else:
@@ -81,14 +80,26 @@ all_reviewers = list(set([review['reviewer'] for review in all_reviews]))
 num_reviewers = len(all_reviewers)
 print(f'Processing {num_reviews} reviews from {num_reviewers} reviewers...')
 
+i = -1
 for review in all_reviews:
     game_id = review['game_id']
     game = [game for game in all_games if game['id'] == game_id][0]
-
     for clue in game['clues']:
+        i += 1
         new_row = clue
         new_row[y_var] = 1 if review[y_var] == clue['word'] else 0
-        output.loc[len(output)] = new_row
+        output.loc[i] = new_row
+    if review['human_selected'] == 'no_good_clues':
+        no_good_clues += 1
+
+output_path = os.path.join(os.path.dirname(__file__), f'output/results/results_{time_info}.csv')
+output.to_csv(output_path)
+
+num_top_selected = output.human_selected.sum()
+print(num_top_selected)
+print(num_reviews)
+print(f'Humans and computers selected the same top word {int((num_top_selected/output.shape[0])*100)}% of the time.')
+print(f'Humans thought there were no good clues {int((no_good_clues/num_reviews)*100)}% of the time.')
 
 print('Preparing data...')
 X = output[X_columns].values.tolist()
@@ -114,7 +125,7 @@ if TUNE_PARAMS:
     C = best_params['C']
     epsilon = best_params['epsilon']
     gamma = best_params['gamma']
-    # Multiple iterations
+    # Multiple iterations of search
     # Best params: {'C': 0.32435022868815844, 'epsilon': 0.1, 'gamma': 2.0, 'kernel': 'rbf'}
     # Best params: {'C': 0.32435022868815844, 'epsilon': 0.08163265306122448, 'gamma': 2.0, 'kernel': 'rbf'}
     # Best params: {'C': 0.2378613016572934, 'epsilon': 0.10526315789473684, 'gamma': 'auto'}
@@ -124,15 +135,11 @@ else:
     C = 0.3
     epsilon = 0.1
     gamma = 0.00001
-    # C = 0.1
-    # epsilon = 0.2
-    # gamma = 'scale'
 
 model = SVR(C=C, epsilon=epsilon, gamma=gamma)
 print('Fitting model...')
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
-print(y_pred)
 r2 = r2_score(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 print(f'R2: {r2}, MSE: {mse}')
