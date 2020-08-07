@@ -1,33 +1,33 @@
 import pandas as pd
-from config import SIZE, VECTORS_OUTPUT_PATH, DEEP
-from helpers import *
+from games_config import SIZE, VECTORS_OUTPUT_PATH, DEEP
+from games_helpers import *
 
 def main():
-    # If True a result csv will be created
+    # If True a result CSV will be created
+    # Result CSV will have the game words and the top 5 generated clues
     create_result_csv = True
     # Number of games to be generated
-    num_games = 100
+    num_games = 5
 
     # Import Glove vectors
-    glove_vectors = pd.read_pickle(f'{VECTORS_OUTPUT_PATH}/glove_vectors.pkl')
-
+    glove_vectors_path = os.path.join(VECTORS_OUTPUT_PATH, 'glove_vectors.pkl')
+    glove_vectors = pd.read_pickle(glove_vectors_path)
     if create_result_csv:
         output_df = pd.DataFrame(columns=['top_clues', 'top_friends', 'low_friends', 'foes', 'neutrals', 'assassin'])
 
     for i in range(num_games):
         print(f'Generating game: {i + 1}')
         words_dict = get_words_dict(glove_vectors)
-        print(words_dict['top_friends'])
-        print(words_dict['assassin'])
-        # print(words_dict['friends'])
-        # print(words_dict['foes'])
         print('Starting GloVe candidates...')
         glove_candidates = get_candidates_df(glove_vectors, True, **words_dict)
         top_candidate_words = glove_candidates.word.tolist()[:SIZE]
         all_candidates = [glove_candidates]
         if DEEP:
-            google_vectors = pd.read_pickle(f'{VECTORS_OUTPUT_PATH}/google_vectors.pkl')
-            ft_vectors = pd.read_pickle(f'{VECTORS_OUTPUT_PATH}/fasttext_vectors.pkl')
+            google_vectors_path = os.path.join(VECTORS_OUTPUT_PATH, 'google_vectors.pkl')
+            google_vectors = pd.read_pickle(google_vectors_path)
+            ft_vectors_path = os.path.join(VECTORS_OUTPUT_PATH, 'fasttext_vectors.pkl')
+            # ft_vectors = pd.read_pickle(f'{VECTORS_OUTPUT_PATH}/fasttext_vectors.pkl')
+            ft_vectors = pd.read_pickle(ft_vectors_path)
             words_dict['words_to_consider'] = top_candidate_words
             words_dict['words_to_consider_frequencies'] = [glove_candidates[glove_candidates.word == word].frequency.iloc[0] for word in top_candidate_words]
             print('Starting Google candidates...')

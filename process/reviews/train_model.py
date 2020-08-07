@@ -1,25 +1,21 @@
-from sklearn.svm import SVR, SVC
-from sklearn.decomposition import PCA
-from sklearn.metrics import mean_squared_error, r2_score, f1_score, accuracy_score, SCORERS
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import cross_validate, GridSearchCV, RandomizedSearchCV
-from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVR
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import make_pipeline
 from scipy import stats
 from sklearn.pipeline import Pipeline
 from datetime import datetime
-from bson import json_util
 from joblib import dump
 import pickle
 import json
 import numpy as np
-import pymongo
 import os
 import pandas as pd
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from glob import glob
+
+dirname = os.path.dirname(__file__)
 
 load_dotenv()
 
@@ -51,11 +47,13 @@ if DOWNLOAD_REVIEWS:
     print('Connected to database...')
     all_reviews = [review for review in db.reviews.find()]
     if SAVE_REVIEWS:
-        json_filepath = f'./output/reviews_pkl/reviews_{time_info}.pkl'
+        json_filepath = os.path.join(dirname, f'output/reviews_pkl/reviews_{time_info}.pkl')
+        # json_filepath = f'./output/reviews_pkl/reviews_{time_info}.pkl'
         with open(json_filepath, 'wb') as outfile:
             pickle.dump(all_reviews, outfile)
 else:
-    list_of_files = glob('./output/reviews_pkl/*')
+    reviews_path = os.path.join(dirname, 'output/reviews_pkl/*')
+    list_of_files = glob(reviews_path)
     latest_file = max(list_of_files, key=os.path.getctime)
     with open(latest_file, 'rb') as pickle_file:
         all_reviews = pickle.load(pickle_file)
@@ -67,15 +65,22 @@ if DOWNLOAD_GAMES:
         game = dict(db.games.find_one({'id': game_id}))
         all_games.append(game)
     if SAVE_GAMES:
-        json_filepath = f'./output/games_pkl/games_{time_info}.pkl'
+        json_filepath = os.path.join(dirname, f'output/games_pkl/games_{time_info}.pkl')
+        # json_filepath = f'./output/games_pkl/games_{time_info}.pkl'
         with open(json_filepath, 'wb') as outfile:
             pickle.dump(all_games, outfile)
 else:
-    list_of_files = glob('./output/games_pkl/*')
+    games_path = os.path.join(dirname, 'output/games_pkl/*')
+    list_of_files = glob(games_path)
     latest_file = max(list_of_files, key=os.path.getctime)
     with open(latest_file, 'rb') as pickle_file:
         all_games = pickle.load(pickle_file)
-print(f'{len(all_reviews)} reviews found...')
+
+num_reviews = len(all_reviews)
+all_reviewers = list(set([review['reviewer'] for review in all_reviews]))
+num_reviewers = len(all_reviewers)
+print(f'Processing {num_reviews} reviews from {num_reviewers} reviewers...')
+
 for review in all_reviews:
     game_id = review['game_id']
     game = [game for game in all_games if game['id'] == game_id][0]
@@ -134,7 +139,7 @@ print(f'R2: {r2}, MSE: {mse}')
 
 if SAVE_MODEL:
     print('Saving model...')
-    model_output_path = f'./output/models/svr_{time_info}.joblib'
+    model_output_path = os.path.join(dirname, f'output/models/svr_{time_info}.joblib')
     dump(model, model_output_path)
 
 
