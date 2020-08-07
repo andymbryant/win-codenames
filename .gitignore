@@ -37,3 +37,6 @@ pnpm-debug.log*
 
 # Flask
 wc/
+
+# venv
+codenames-env/
