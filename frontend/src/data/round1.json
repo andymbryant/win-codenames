@@ -1,0 +1,109 @@
+{
+  "cards": [
+    {
+      "word": "fair",
+      "type": "friend"
+    },
+    {
+      "word": "time",
+      "type": "friend"
+    },
+    {
+      "word": "lawyer",
+      "type": "friend"
+    },
+    {
+      "word": "tube",
+      "type": "friend"
+    },
+    {
+      "word": "marble",
+      "type": "friend"
+    },
+    {
+      "word": "crash",
+      "type": "friend"
+    },
+    {
+      "word": "key",
+      "type": "friend"
+    },
+    {
+      "word": "bolt",
+      "type": "friend"
+    },
+    {
+      "word": "stadium",
+      "type": "foe"
+    },
+    {
+      "word": "mouse",
+      "type": "foe"
+    },
+    {
+      "word": "cloak",
+      "type": "foe"
+    },
+    {
+      "word": "model",
+      "type": "foe"
+    },
+    {
+      "word": "kangaroo",
+      "type": "foe"
+    },
+    {
+      "word": "part",
+      "type": "foe"
+    },
+    {
+      "word": "church",
+      "type": "foe"
+    },
+    {
+      "word": "pupil",
+      "type": "foe"
+    },
+    {
+      "word": "leprechaun",
+      "type": "foe"
+    },
+    {
+      "word": "animal",
+      "type": "neutral"
+    },
+    {
+      "word": "play",
+      "type": "neutral"
+    },
+    {
+      "word": "mass",
+      "type": "neutral"
+    },
+    {
+      "word": "shop",
+      "type": "neutral"
+    },
+    {
+      "word": "light",
+      "type": "neutral"
+    },
+    {
+      "word": "compound",
+      "type": "neutral"
+    },
+    {
+      "word": "grass",
+      "type": "neutral"
+    },
+    {
+      "word": "copper",
+      "type": "assassin"
+    }
+  ],
+  "spymaster": {
+    "top_clue": "attorney",
+    "clues": ["attorney", "counsel", "reasonable", "honest", "legal", "solicitor", "good", "prosecutor", "judge", "day"],
+    "num_words_to_consider": 3
+  }
+}
