@@ -2,6 +2,7 @@ bson==0.5.10
 click==7.1.2
 Flask==1.1.2
 Flask-Cors==3.0.8
+Flask-PyMongo==2.3.0
 itsdangerous==1.1.0
 Jinja2==2.11.2
 joblib==0.16.0
@@ -11,6 +12,7 @@ numpy==1.19.1
 pandas==1.1.0
 pymongo==3.11.0
 python-dateutil==2.8.1
+python-dotenv==0.14.0
 pytz==2020.1
 regex==2020.7.14
 scikit-learn==0.23.1
@@ -21,4 +23,3 @@ threadpoolctl==2.1.0
 tqdm==4.48.2
 uuid==1.30
 Werkzeug==1.0.1
-
