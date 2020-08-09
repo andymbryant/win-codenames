@@ -61,13 +61,13 @@ def main():
     print('Generating output...')
     # Instead I exported every vector file individually
     glove_output = os.path.join(dirname, 'output/glove_vectors.pkl')
-    df_glove.to_pickle(glove_output)
+    df_glove.to_pickle(glove_output, protocol=3)
 
     google_output = os.path.join(dirname, 'output/google_vectors.pkl')
-    df_google.to_pickle(google_output)
+    df_google.to_pickle(google_output, protocol=3)
 
     ft_output = os.path.join(dirname, 'output/fasttext_vectors.pkl')
-    df_ft.to_pickle(ft_output)
+    df_ft.to_pickle(ft_output, protocol=3)
 
 if __name__ == '__main__':
     main()
